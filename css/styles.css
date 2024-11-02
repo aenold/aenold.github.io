@@ -421,3 +421,173 @@ footer {
 .mt-20 {
     margin-top: 20px;
 }
+/* Collection Page Specific Styles */
+.collection-header {
+    text-align: center;
+    padding: 60px 20px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.collection-header h2 {
+    color: var(--gold-dark);
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.collection-header p {
+    color: var(--dark);
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.filter-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 2px solid var(--gold-primary);
+    color: var(--gold-dark);
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--gold-primary);
+    color: white;
+}
+
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(212, 175, 55, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    position: relative;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    overflow: hidden;
+}
+
+.product-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-details {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-details h3 {
+    color: var(--gold-dark);
+    margin-bottom: 10px;
+}
+
+.product-features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 15px 0;
+    font-size: 0.9em;
+    color: var(--dark);
+}
+
+.product-features span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-features i {
+    color: var(--gold-primary);
+}
+
+.custom-orders {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to right, var(--cream), white, var(--cream));
+    margin-top: 40px;
+}
+
+.custom-orders h2 {
+    color: var(--gold-dark);
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .collection-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-btn {
+        width: 80%;
+        max-width: 300px;
+    }
+    /* Add these rules to your existing <style> section in the about.html */
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns by default */
+        gap: 30px;
+        padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .about-grid {
+            grid-template-columns: 1fr; /* Switch to single column on mobile */
+        }
+
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding: 0 15px;
+        }
+
+        .centered-title {
+            font-size: 1.6em;
+            padding: 0 15px;
+            margin: 20px 0;
+        }
+    }
