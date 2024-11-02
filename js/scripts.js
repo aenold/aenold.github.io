@@ -22,6 +22,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Product Collection Filter Functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const products = document.querySelectorAll('.product-item');
+
+    if (filterButtons.length > 0 && products.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const category = button.dataset.category;
+
+                // Add fade effect to filtering
+                products.forEach(product => {
+                    product.style.opacity = '0';
+                    setTimeout(() => {
+                        if (category === 'all' || product.dataset.category === category) {
+                            product.style.display = 'block';
+                            setTimeout(() => {
+                                product.style.opacity = '1';
+                            }, 50);
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    }, 300);
+                });
+            });
+        });
+    }
+
     // Smooth Scrolling for Navigation Links
     const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -77,6 +109,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         category.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Product Item Hover Effects for Explore Page
+    const productItems = document.querySelectorAll('.product-item');
+
+    productItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+
+        item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
         });
     });
@@ -173,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add CSS for scroll button
+    // Add CSS for scroll button and animations
     const style = document.createElement('style');
     style.textContent = `
         .scroll-top {
@@ -207,6 +252,11 @@ document.addEventListener('DOMContentLoaded', function() {
         .fade-in {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .product-item {
+            transition: all 0.3s ease;
+            opacity: 1;
         }
     `;
     document.head.appendChild(style);
