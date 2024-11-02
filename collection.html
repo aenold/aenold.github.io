@@ -24,19 +24,22 @@
         .product-card {
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 2px 15px rgba(212, 175, 55, 0.15);
             overflow: hidden;
             transition: transform 0.3s ease;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
         }
 
         .product-image {
             width: 100%;
             height: 250px;
             object-fit: cover;
+            border-bottom: 3px solid var(--gold-primary);
         }
 
         .product-info {
@@ -47,22 +50,19 @@
         .product-title {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
-            color: #333;
-            text-align: center;
+            color: var(--gold-dark);
         }
 
         .product-description {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 1rem;
-            text-align: center;
         }
 
         .product-price {
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--gold-dark);
             font-size: 1.1rem;
-            text-align: center;
         }
 
         .category-filter {
@@ -72,7 +72,7 @@
 
         .filter-button {
             background: none;
-            border: 2px solid #2c3e50;
+            border: 2px solid var(--gold-primary);
             padding: 0.5rem 1rem;
             margin: 0 0.5rem;
             border-radius: 25px;
@@ -80,50 +80,92 @@
             transition: all 0.3s ease;
         }
 
-        .filter-button:hover {
-            background: #2c3e50;
+        .filter-button:hover,
+        .filter-button.active {
+            background: var(--gold-primary);
             color: white;
         }
 
         .back-button {
-            position: absolute;
-            left: 20px;
+            position: fixed;
             top: 20px;
-            padding: 8px 15px;
-            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            left: 20px;
+            background: var(--gold-primary);
             color: white;
-            border: none;
+            padding: 8px 15px;
             border-radius: 5px;
-            cursor: pointer;
             text-decoration: none;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 1000;
             transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+            font-size: 14px;
+        }
+
+        .back-button i {
+            font-size: 12px;
         }
 
         .back-button:hover {
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary));
+            background: var(--gold-dark);
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* Remove underline from logo link */
-        .logo a {
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold-primary);
+            color: white;
+            width: 40px;  /* Make it circular */
+            height: 40px;  /* Make it circular */
+            border-radius: 50%;  /* Make it circular */
             text-decoration: none;
-            color: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;  /* Center the icon */
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .product-collection h2 {
-            text-align: center;
-            margin-bottom: 2rem;
+        .scroll-top i {
+            font-size: 16px;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
         }
     </style>
 </head>
 <body>
-<a href="index.html" class="back-button">← Back to Homepage</a>
+<a href="index.html" class="back-button">
+    <i class="fas fa-arrow-left"></i>
+    Back to Homepage
+</a>
+
+<a href="#" class="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
 <header>
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html"><h1>Timber & Touch</h1></a>
+            <h1>Timber & Touch</h1>
         </div>
         <p class="tagline">"Where Nature Meets Elegance in Every Piece"</p>
     </nav>
@@ -131,72 +173,72 @@
 
 <main>
     <section class="product-collection">
-        <h2>Our Collection</h2>
+        <h2 class="centered-title">Our Collection</h2>
         <div class="category-filter">
-            <button class="filter-button">All</button>
-            <button class="filter-button">Sofas & Chairs</button>
-            <button class="filter-button">Dining Tables</button>
-            <button class="filter-button">Cabinets</button>
+            <button class="filter-button active" onclick="filterProducts('all')">All</button>
+            <button class="filter-button" onclick="filterProducts('sofa')">Sofas & Chairs</button>
+            <button class="filter-button" onclick="filterProducts('table')">Dining Tables</button>
+            <button class="filter-button" onclick="filterProducts('cabinet')">Cabinets</button>
         </div>
 
         <div class="products-grid">
             <!-- Sofa Product -->
-            <div class="product-card">
+            <div class="product-card sofa">
                 <img src="assets/modern-sofa.jpg" alt="Modern Comfort Sofa" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Modern Comfort Sofa</h3>
                     <p class="product-description">Contemporary design meets ultimate comfort with this elegant three-seater sofa.</p>
-                    <p class="product-price">$1,299</p>
+                    <p class="product-price">₱72,500</p>
                 </div>
             </div>
 
             <!-- Dining Table Product -->
-            <div class="product-card">
+            <div class="product-card table">
                 <img src="assets/dining-table.jpg" alt="Rustic Dining Table" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Rustic Dining Table</h3>
                     <p class="product-description">Solid oak dining table with natural finish, seats 6-8 people.</p>
-                    <p class="product-price">$899</p>
+                    <p class="product-price">₱50,000</p>
                 </div>
             </div>
 
             <!-- Cabinet Product -->
-            <div class="product-card">
+            <div class="product-card cabinet">
                 <img src="assets/storage-cabinet.jpg" alt="Modern Storage Cabinet" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Modern Storage Cabinet</h3>
                     <p class="product-description">Sleek storage solution with adjustable shelves and soft-close doors.</p>
-                    <p class="product-price">$749</p>
+                    <p class="product-price">₱41,800</p>
                 </div>
             </div>
 
             <!-- Armchair Product -->
-            <div class="product-card">
+            <div class="product-card sofa">
                 <img src="assets/armchair.jpg" alt="Classic Armchair" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Classic Armchair</h3>
                     <p class="product-description">Timeless design armchair with premium fabric upholstery.</p>
-                    <p class="product-price">$599</p>
+                    <p class="product-price">₱33,500</p>
                 </div>
             </div>
 
             <!-- Coffee Table Product -->
-            <div class="product-card">
+            <div class="product-card table">
                 <img src="assets/coffee-table.jpg" alt="Minimalist Coffee Table" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Minimalist Coffee Table</h3>
                     <p class="product-description">Clean lines and practical storage make this coffee table a perfect centerpiece.</p>
-                    <p class="product-price">$449</p>
+                    <p class="product-price">₱25,000</p>
                 </div>
             </div>
 
             <!-- Bookshelf Product -->
-            <div class="product-card">
+            <div class="product-card cabinet">
                 <img src="assets/bookshelf.jpg" alt="Industrial Bookshelf" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Industrial Bookshelf</h3>
                     <p class="product-description">Metal and wood combination bookshelf with adjustable shelves.</p>
-                    <p class="product-price">$679</p>
+                    <p class="product-price">₱37,900</p>
                 </div>
             </div>
         </div>
@@ -230,6 +272,43 @@
     </div>
 </footer>
 
-<script src="js/scripts.js"></script>
+<script>
+    // Filter products
+    function filterProducts(category) {
+        const buttons = document.querySelectorAll('.filter-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+        document.querySelector(`.filter-button[onclick="filterProducts('${category}')"]`).classList.add('active');
+
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(product => {
+            if (category === 'all' || product.classList.contains(category)) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+
+    // Scroll to top functionality
+    const scrollButton = document.querySelector('.scroll-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollButton.classList.add('visible');
+        } else {
+            scrollButton.classList.remove('visible');
+        }
+    });
+
+    scrollButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
 </body>
 </html>
